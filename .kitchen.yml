@@ -1,0 +1,17 @@
+---
+driver:
+  name: vagrant
+  network:
+  - ["forwarded_port", {guest: 8081, host: 8081}]
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+    - recipe[milk-lizard::default]
+    attributes:

@@ -1,0 +1,21 @@
+http_port <%=@squid_port%>
+
+#refresh_pattern ^ftp:           1440    20%     10080
+#refresh_pattern ^gopher:        1440    0%      1440
+#refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+#refresh_pattern .               0       20%     4320
+
+cache_replacement_policy heap LFUDA
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern .               0       20%     4320 refresh-ims
+
+acl CONNECT method CONNECT
+
+http_access allow all
+
+minimum_object_size 4 MB
+
+maximum_object_size 1000 MB
+
+cache_dir aufs <%=@cache_dir%> <%=@cache_size%> 16 256
